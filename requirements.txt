@@ -21,7 +21,6 @@ colorama==0.4.6
 comm==0.1.4
 cycler==0.11.0
 Cython==3.0.3
-debugpy==1.8.0
 decorator==5.1.1
 Eel==0.16.0
 executing==2.0.0
@@ -97,9 +96,6 @@ Pygments==2.16.1
 pyinstaller==5.13.2
 pyinstaller-hooks-contrib==2023.8
 pyparsing==3.0.9
-PyQt5==5.15.9
-PyQt5-Qt5==5.15.2
-PyQt5-sip==12.12.2
 PySocks==1.7.1
 python-dateutil==2.8.2
 pytz==2023.3.post1
@@ -136,5 +132,5 @@ Werkzeug==3.0.0
 whichcraft==0.6.1
 wrapt==1.15.0
 yarl==1.9.2
-zope.event==5.0
-zope.interface==6.0
+
+
