@@ -19,7 +19,6 @@ charset-normalizer==3.2.0
 click==8.1.7
 colorama==0.4.6
 comm==0.1.4
-cuda-python==12.2.0
 cycler==0.11.0
 Cython==3.0.3
 debugpy==1.8.0
