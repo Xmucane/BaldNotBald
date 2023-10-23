@@ -11,11 +11,9 @@ app.template_folder = 'templates'
 app.config['UPLOAD_FOLDER'] = 'Test'
 model = load_model('modelim.h5', compile=True)
 
-
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
 
 @app.route('/', methods=['GET', 'POST'])
 def classify_image():
@@ -41,7 +39,5 @@ def classify_image():
 
     return render_template('index.html')
 
-
 if __name__ == '__main__':
     app.run(debug=True, port=443)
-
