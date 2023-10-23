@@ -39,7 +39,7 @@ if __name__ == '__main__':
     from gunicorn.app.wsgiapp import WSGIApplication
 
     gunicorn_opts = {
-        'bind': '0.0.0.0:8000',  # Gunicorn'un çalıştığı adres ve port
+        'bind': '0.0.0.0:10000',  # Gunicorn'un çalıştığı adres ve port
         'workers': 4,  # İşçi sayısı
         'worker_class': 'gevent',  # İşçi sınıfı
         'timeout': 60  # Zaman aşımı
