@@ -23,7 +23,7 @@ libclang
 Markdown
 MarkupSafe
 numpy
-tensorflow==2.12
+tensorflow==2.10
 oauthlib
 opt-einsum
 packaging
