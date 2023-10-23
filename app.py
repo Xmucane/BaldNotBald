@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-from keras.preprocessing.image import load_img, img_to_array
-from keras.models import load_model
+from tensorflow.keras.preprocessing.image import load_img, img_to_array
+from tensorflow.keras.models import load_model
 from werkzeug.utils import secure_filename
 import os
 import numpy as np
