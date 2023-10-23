@@ -40,8 +40,9 @@ if __name__ == '__main__':
 
     gunicorn_opts = {
         'bind': '0.0.0.0:10000',  # Gunicorn'un çalıştığı adres ve port
-        'workers': 4,  # İşçi sayısı
+        'workers': 2,  # İşçi sayısı
         'worker_class': 'gevent',  # İşçi sınıfı
+        'worker_memory_limit': "200M",  # Bellek sınırlamasını azaltın
         'timeout': 60  # Zaman aşımı
     }
 
