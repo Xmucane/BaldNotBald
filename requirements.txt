@@ -1,5 +1,6 @@
 Flask
 Keras
-tensorflow==2.1
+tensorflow
+tensorflow-lite
 numpy
 Werkzeug
