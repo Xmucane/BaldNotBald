@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-from keras.preprocessing import image
+from keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
 from werkzeug.utils import secure_filename
 import os
@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.template_folder = 'templates'
 # Yüklenen dosyaların saklandığı klasörün adı
 app.config['UPLOAD_FOLDER'] = 'Test'
-model = load_model('modelim.h5', compile=True)
+model = load_model('modelim.h5')
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -27,9 +27,9 @@ def classify_image():
                 app.config['UPLOAD_FOLDER'], filename))
 
             # Kaydedilen dosyayı işle
-            img = image.load_img(os.path.join(
+            img = load_img(os.path.join(
                 app.config['UPLOAD_FOLDER'], filename), target_size=(64, 64))
-            img = image.img_to_array(img)
+            img = img_to_array(img)
             img = np.expand_dims(img, axis=0)
 
             predictions = model.predict(img)
