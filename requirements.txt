@@ -23,6 +23,11 @@ libclang
 Markdown
 MarkupSafe
 numpy
+tensorboard
+tensorboard-data-server
+tensorflow-estimator
+tensorflow-intel
+tensorflow-io-gcs-filesystem
 oauthlib
 opt-einsum
 packaging
