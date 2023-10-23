@@ -6,7 +6,7 @@ import os
 import numpy as np
 
 app = Flask(__name__)
-app.template_folder = 'Templates'
+app.template_folder = 'templates'
 # Yüklenen dosyaların saklandığı klasörün adı
 app.config['UPLOAD_FOLDER'] = 'Test'
 model = load_model('modelim.h5', compile=True)
