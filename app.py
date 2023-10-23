@@ -5,8 +5,11 @@ from werkzeug.utils import secure_filename
 import os
 import numpy as np
 
-app = Flask(__name__)
-app.secret_key = "manbearpig_MUDMAN666"
+# 'templates' klasörünün yolunu belirtin
+template_folder_path = "templates"  # templates klasörünün tam yolunu burada belirtin
+
+app = Flask(__name__, template_folder=template_folder_path)
+
 # Yüklenen dosyaların saklandığı klasörün adı
 app.config['UPLOAD_FOLDER'] = 'Test'
 model = load_model('modelim.h5', compile=True)
