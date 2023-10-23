@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image  # TensorFlow Keras kullanıyoruz
+from tensorflow.keras.models import load_model  # TensorFlow Keras kullanıyoruz
 from werkzeug.utils import secure_filename
 import os
 import numpy as np
-from PIL import Image
+from PIL import Image  # Pillow'ı içe aktar
 
 app = Flask(__name__)
 # Yüklenen dosyaların saklandığı klasörün adı
@@ -23,14 +23,12 @@ def classify_image():
         if uploaded_file.filename != '':
             # Dosyayı güvenli bir şekilde kaydet
             filename = secure_filename(uploaded_file.filename)
-            uploaded_file.save(os.path.join(
-                app.config['UPLOAD_FOLDER'], filename))
+            uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             # Kaydedilen dosyayı işle
-            img = Image.open(os.path.join(
-                app.config['UPLOAD_FOLDER'], filename))
+            img = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], filename))  # Pillow ile aç
             img = img.resize((64, 64))
-            img = np.array(img)
+            img = image.img_to_array(img)
             img = np.expand_dims(img, axis=0)
 
             predictions = model.predict(img)
