@@ -14,9 +14,22 @@
                 </label>
                 <input type="file" name="file" accept="image/*" id="file-input" style="display: none;">
                 <input type="submit" value="Sınıflandır" class="custom-submit-button">
-
             </form>
             <p id="selected-image"></p>
+            
+            {% if predicted_class is not none %}
+            <h2>Sonuç:</h2>
+            <p>
+                {% if predicted_class == 0 %}
+                    <strong>Bu kişi kel.</strong>
+                {% else %}
+                    <strong>Bu kişi kel değil.</strong>
+                {% endif %}
+            </p>
+
+            <h2>Gönderilen Resim:</h2>
+            <img src="{{ url_for('uploaded_file', filename=uploaded_filename) }}" alt="Uploaded Image" width="200">
+            {% endif %}
         </div>
     </div>
     <script>
