@@ -29,7 +29,7 @@ def classify_image():
             # Kaydedilen dosyayı işle
             img = Image.open(os.path.join(
                 app.config['UPLOAD_FOLDER'], filename))
-            img = img.resize((64, 64))
+            img = img.resize((32, 32))
             img = np.array(img)
             img = np.expand_dims(img, axis=0)
 
