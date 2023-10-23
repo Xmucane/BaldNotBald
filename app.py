@@ -6,7 +6,7 @@ import os
 import numpy as np
 
 app = Flask(__name__)
-app.secret_key = "3b92ff89-2e62-40a0-bb9d-aa7a910b0972"
+app.secret_key = "manbearpig_MUDMAN666"
 # Yüklenen dosyaların saklandığı klasörün adı
 app.config['UPLOAD_FOLDER'] = 'Test'
 model = load_model('modelim.h5', compile=True)
