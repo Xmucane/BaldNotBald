@@ -11,6 +11,9 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'Test'
 model = load_model('modelim.h5', compile=True)
 
+# Modelin girdi şeklini belirleyin
+input_shape = (32, 32, 3)  # Görüntü boyutunu (32, 32, 3) olarak belirleyin
+
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
@@ -29,7 +32,7 @@ def classify_image():
             # Kaydedilen dosyayı işle
             img = Image.open(os.path.join(
                 app.config['UPLOAD_FOLDER'], filename))
-            img = img.resize((32, 32))
+            img = img.resize(input_shape[:2])  # Görüntüyü girdi boyutuna yeniden boyutlandır
             img = np.array(img)
             img = np.expand_dims(img, axis=0)
 
