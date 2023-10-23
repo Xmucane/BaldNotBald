@@ -5,10 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 import numpy as np
 
-# 'templates' klasörünün yolunu belirtin
-template_folder_path = "templates"  # templates klasörünün tam yolunu burada belirtin
-
-app = Flask(__name__, template_folder=template_folder_path)
+app = Flask(__name__)
 
 # Yüklenen dosyaların saklandığı klasörün adı
 app.config['UPLOAD_FOLDER'] = 'Test'
