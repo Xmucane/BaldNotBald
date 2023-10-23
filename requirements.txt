@@ -1,6 +1,4 @@
 Flask
 Keras
-tensorflow
-tensorflow-lite
 numpy
 Werkzeug
