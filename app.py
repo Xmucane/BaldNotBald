@@ -1,11 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-from tensorflow.keras.preprocessing.image import img_to_array, load_img
-from tensorflow.keras.models import load_model
+from keras.preprocessing import image
+from keras.models import load_model
 from werkzeug.utils import secure_filename
 import os
 import numpy as np
 
-# Diğer kodlar burada
+app = Flask(__name__)
+# Yüklenen dosyaların saklandığı klasörün adı
+app.config['UPLOAD_FOLDER'] = 'Test'
+model = load_model('modelim.h5', compile=True)
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 @app.route('/', methods=['GET', 'POST'])
 def classify_image():
@@ -19,9 +26,9 @@ def classify_image():
                 app.config['UPLOAD_FOLDER'], filename))
 
             # Kaydedilen dosyayı işle
-            img = load_img(os.path.join(
+            img = image.load_img(os.path.join(
                 app.config['UPLOAD_FOLDER'], filename), target_size=(64, 64))
-            img = img_to_array(img)
+            img = image.img_to_array(img)
             img = np.expand_dims(img, axis=0)
 
             predictions = model.predict(img)
@@ -31,7 +38,5 @@ def classify_image():
 
     return render_template('index.html')
 
-# Diğer kodlar burada
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
