@@ -6,6 +6,7 @@ from tensorflow.keras.models import load_model
 from werkzeug.utils import secure_filename
 import os
 import numpy as np
+from PIL import Image
 
 app = Flask(__name__)
 
