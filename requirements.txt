@@ -1,5 +1,4 @@
 Flask
-tensorflow-cpu
 Keras
 numpy
 Werkzeug
