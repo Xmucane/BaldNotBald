@@ -4,11 +4,16 @@ from keras.models import load_model
 from werkzeug.utils import secure_filename
 import os
 import numpy as np
+import tensorflow as tf
 
 app = Flask(__name__)
 # Yüklenen dosyaların saklandığı klasörün adı
 app.config['UPLOAD_FOLDER'] = 'Test'
 model = load_model('modelim.h5', compile=True)
+
+# TensorFlow Lite modelini yükleyin
+tflite_model = tf.lite.Interpreter(model_path='model.tflite')
+tflite_model.allocate_tensors()
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -34,7 +39,10 @@ def classify_image():
             img = image.img_to_array(img)
             img = np.expand_dims(img, axis=0)
 
-            predictions = model.predict(img)
+            # TensorFlow Lite modelini kullanarak tahmin yapın
+            tflite_model.set_tensor(tflite_model.get_input_details()[0]['index'], img)
+            tflite_model.invoke()
+            predictions = tflite_model.get_tensor(tflite_model.get_output_details()[0]['index'])
             predicted_class = int(predictions[0][0])
             uploaded_filename = filename
 
