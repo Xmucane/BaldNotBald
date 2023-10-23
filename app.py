@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 import numpy as np
 from PIL import Image
+from gunicorn import Config
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'Test'
@@ -35,5 +36,11 @@ def classify_image():
 
     return render_template('index.html')
 
+class MyGunicornConfig(Config):
+    workers = 4  # İşçi sayısını ayarlayabilirsiniz
+    worker_memory_limit = "100M"  # İşçi bellek sınırlamasını ayarlayabilirsiniz
+    timeout = 60  # Zaman aşımını ayarlayabilirsiniz
+
 if __name__ == '__main__':
-    app.run(debug=False)
+    from gunicorn.app.wsgiapp import WSGIApplication
+    WSGIApplication("%(prog)s [OPTIONS]").run()
