@@ -23,7 +23,7 @@ libclang
 Markdown
 MarkupSafe
 numpy
-tensorflow==1.15.0
+tensorflow==2.12
 tensorboard
 tensorboard-data-server
 tensorflow-estimator
