@@ -4,6 +4,7 @@ from tensorflow.keras.models import load_model
 from werkzeug.utils import secure_filename
 import os
 import numpy as np
+from PIL import Image
 
 app = Flask(__name__)
 # Yüklenen dosyaların saklandığı klasörün adı
@@ -26,9 +27,10 @@ def classify_image():
                 app.config['UPLOAD_FOLDER'], filename))
 
             # Kaydedilen dosyayı işle
-            img = image.load_img(os.path.join(
-                app.config['UPLOAD_FOLDER'], filename), target_size=(64, 64))
-            img = image.img_to_array(img)
+            img = Image.open(os.path.join(
+                app.config['UPLOAD_FOLDER'], filename))
+            img = img.resize((64, 64))
+            img = np.array(img)
             img = np.expand_dims(img, axis=0)
 
             predictions = model.predict(img)
