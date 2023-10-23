@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resim Sınıflandırma</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="centered-frame">
+        <div class="frame">
+            <h1>Resim Sınıflandırma</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <label for="file-input" class="custom-file-upload">
+                    <i class="fa fa-cloud-upload"></i> Resim Seçin
+                </label>
+                <input type="file" name="file" accept="image/*" id="file-input" style="display: none;">
+                <input type="submit" value="Sınıflandır" class="custom-submit-button">
+
+            </form>
+            <p id="selected-image"></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById("file-input").addEventListener("change", function() {
+            var fileName = this.value.split("\\").pop();
+            document.getElementById("selected-image").textContent = "Seçilen Resim: " + fileName;
+        });
+    </script>
+</body>
+</html>
