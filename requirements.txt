@@ -7,3 +7,4 @@ Jinja2
 termcolor
 urllib3
 wheel
+Pillow
