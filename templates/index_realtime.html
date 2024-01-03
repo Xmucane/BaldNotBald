@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Kellik Tahmini</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        #liveVideo {
+            display: none;
+        }
+
+        #statusText {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centered-frame">
+        <div class="frame">
+            <h1>Real-Time Kellik Tahmini</h1>
+
+            <h2 id="cameraStatus">Kamera Durumu: Beklemede</h2>
+            
+            <!-- Eklendi: Görüntü ve metin gösterimi için stil özellikleri eklendi -->
+            <img id="liveVideo" alt="Real-Time Video">
+            <p id="statusText">Görüntü Alınıyor...</p>
+
+            <!-- Eklendi: Buton eklendi ve "openCamera" fonksiyonu butona bağlandı -->
+            <button onclick="openCamera()">Kamera Aç</button>
+        </div>
+    </div>
+
+    <script>
+        // Eklendi: Sayfa yüklendiğinde "Beklemede" mesajı görüntülenir.
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('cameraStatus').innerHTML = 'Kamera Durumu: Beklemede';
+        });
+
+        function openCamera() {
+            fetch('/open_camera')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById('cameraStatus').innerHTML = 'Kamera Durumu: Çalışıyor';
+                        // Eklendi: Görüntü ve metin gösterimi için stil özellikleri eklendi
+                        document.getElementById('liveVideo').style.display = 'block';
+                        document.getElementById('statusText').style.display = 'block';
+                        document.getElementById('statusText').innerHTML = 'Görüntü Alınıyor...';
+                        document.getElementById('liveVideo').src = '{{ url_for("video_feed") }}';
+                    } else {
+                        alert('Kamera açma işlemi başarısız oldu.');
+                    }
+                });
+        }
+
+        function updateCameraStatus() {
+            fetch('/get_camera_status')
+                .then(response => response.json())
+                .then(data => {
+                    let cameraStatus = document.getElementById('cameraStatus');
+                    cameraStatus.innerHTML = `Kamera Durumu: ${data.status}`;
+                    if (data.status === 'Çalışıyor') {
+                        document.getElementById('statusText').innerHTML = 'Görüntü Alınıyor...';
+                    }
+                });
+        }
+
+        setInterval(updateCameraStatus, 1000);
+    </script>
+</body>
+
+</html>
